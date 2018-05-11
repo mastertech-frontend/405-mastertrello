@@ -11,4 +11,9 @@ class Lista{
         
         document.body.appendChild(this.elementoHTML);
     }
+
+    adicionarCard(){
+        let card = new Card();
+        this.elementoHTML.appendChild(card.elementoHTML);
+    }
 }
