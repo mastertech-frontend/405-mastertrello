@@ -12,4 +12,3 @@ class Lista{
         document.body.appendChild(this.elementoHTML);
     }
 }
-let lista = new Lista();
