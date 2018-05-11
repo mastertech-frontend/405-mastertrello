@@ -1,9 +1,8 @@
 class Card{
-    constructor(){
-        this.texto = 'O Renan tá de férias hoje';
+    constructor(textoDeEntrada){
         this.feito = false;
 
         this.elementoHTML = document.createElement('li');
-        this.elementoHTML.innerHTML = this.texto;
+        this.elementoHTML.innerHTML = textoDeEntrada;
     }
 }

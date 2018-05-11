@@ -1,10 +1,9 @@
 class Card{
-    constructor(){
-        this.texto = 'O Renan tá de férias hoje';
+    constructor(textoDeEntrada){
         this.feito = false;
 
         this.elementoHTML = document.createElement('li');
-        this.elementoHTML.innerHTML = this.texto;
+        this.elementoHTML.innerHTML = textoDeEntrada;
     }
 }
 class Lista{
@@ -21,14 +20,11 @@ class Lista{
         document.body.appendChild(this.elementoHTML);
     }
 
-    adicionarCard(){
-        let card = new Card();
+    adicionarCard(textoDeEntrada){
+        let card = new Card(textoDeEntrada);
         this.elementoHTML.appendChild(card.elementoHTML);
     }
 }
 let lista = new Lista();
-lista.adicionarCard();
-lista.adicionarCard();
-lista.adicionarCard();
-lista.adicionarCard();
-
+lista.adicionarCard('Renan tá de férias');
+lista.adicionarCard('Eu to com fome');
