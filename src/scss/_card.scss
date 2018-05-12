@@ -5,4 +5,10 @@ li{
     margin: 10px 0;
     border-radius: 5px;
     list-style-type: none; 
+    font-size: 16px;
+}
+
+li.feito{
+    text-decoration: line-through;
+    color: #bbb;
 }

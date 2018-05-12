@@ -4,5 +4,9 @@ class Card{
 
         this.elementoHTML = document.createElement('li');
         this.elementoHTML.innerHTML = textoDeEntrada;
+
+        this.elementoHTML.onclick = () => {
+            this.elementoHTML.classList.add('feito');
+        }
     }
 }
