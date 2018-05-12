@@ -20,9 +20,13 @@ class Lista{
     }
 
     adicionarCard(textoDeEntrada){
-        let card = new Card(textoDeEntrada);
+        let card = new Card(textoDeEntrada, this);
         this.cards.push(card);
         
         this.elementoHTML.insertBefore(card.elementoHTML, this.input);
+    }
+
+    removerCard(card){
+        this.elementoHTML.removeChild(card.elementoHTML);
     }
 }

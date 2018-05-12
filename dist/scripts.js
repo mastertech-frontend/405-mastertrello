@@ -1,9 +1,19 @@
 class Card{
-    constructor(textoDeEntrada){
+    constructor(textoDeEntrada, lista){
         this.feito = false;
+        this.lista = lista;
 
         this.elementoHTML = document.createElement('li');
         this.elementoHTML.innerHTML = textoDeEntrada;
+        
+        this.botao = document.createElement('span');
+        this.botao.innerHTML = 'x';
+
+        this.botao.onclick = () => {
+            this.lista.removerCard(this);
+        }
+    
+        this.elementoHTML.appendChild(this.botao);
 
         this.elementoHTML.onclick = () => {
             this.elementoHTML.classList.add('feito');
@@ -32,10 +42,14 @@ class Lista{
     }
 
     adicionarCard(textoDeEntrada){
-        let card = new Card(textoDeEntrada);
+        let card = new Card(textoDeEntrada, this);
         this.cards.push(card);
         
         this.elementoHTML.insertBefore(card.elementoHTML, this.input);
+    }
+
+    removerCard(card){
+        this.elementoHTML.removeChild(card.elementoHTML);
     }
 }
 let lista = new Lista();

@@ -22,7 +22,19 @@ li {
   margin: 10px 0;
   border-radius: 5px;
   list-style-type: none;
-  font-size: 16px; }
+  font-size: 16px;
+  position: relative; }
+  li span {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #ddd;
+    padding: 2px 7px;
+    border-radius: 100%;
+    cursor: pointer; }
+  li span:hover {
+    background-color: red;
+    color: white; }
 
 li.feito {
   text-decoration: line-through;
