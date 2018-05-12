@@ -1,5 +1,6 @@
 class Card{
     constructor(textoDeEntrada, lista){
+        this.texto = textoDeEntrada;
         this.feito = false;
         this.lista = lista;
 

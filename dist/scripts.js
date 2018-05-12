@@ -1,5 +1,17 @@
+class App{
+    constructor(){
+        this.listas = [];
+        let lista = new Lista();
+        let lista2 = new Lista();
+
+        this.listas.push(lista);
+        
+    }
+
+}
 class Card{
     constructor(textoDeEntrada, lista){
+        this.texto = textoDeEntrada;
         this.feito = false;
         this.lista = lista;
 
@@ -39,6 +51,7 @@ class Lista{
         }
         
         document.querySelector('section').appendChild(this.elementoHTML);
+        this.carregar();
     }
 
     adicionarCard(textoDeEntrada){
@@ -46,11 +59,34 @@ class Lista{
         this.cards.push(card);
         
         this.elementoHTML.insertBefore(card.elementoHTML, this.input);
+        this.salvar();
     }
 
     removerCard(card){
         this.elementoHTML.removeChild(card.elementoHTML);
+        
+        this.salvar();//gerou um erro
+    }
+
+    salvar(){
+        let lista = [];
+
+        for(let card of this.cards){
+            lista.push(card.texto);
+        }
+
+        let listaString = JSON.stringify(lista);
+        localStorage.setItem('lista', listaString);
+    }
+
+    carregar(){
+        let listaString = localStorage.getItem('lista');
+        let lista = JSON.parse(listaString);
+
+        for(let texto of lista){
+            this.adicionarCard(texto);
+        }
+        
     }
 }
-let lista = new Lista();
-let lista2 = new Lista();
+let app = new App();
