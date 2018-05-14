@@ -1,11 +1,23 @@
 class App{
     constructor(){
-        this.listas = [];
-        let lista = new Lista();
-        let lista2 = new Lista();
+        this.carregar();
+    }
 
-        this.listas.push(lista);
-        
+    salvar(){
+        let string = this.lista.toString();
+
+        localStorage.setItem('lista', string);
+    }
+
+    carregar(){
+        let string = localStorage.getItem('lista');
+        let json = JSON.parse(string);
+
+        this.lista = new Lista(this);
+
+        for(let card of json){
+            this.lista.adicionarCard(card.texto);
+        }
     }
 
 }
@@ -31,9 +43,21 @@ class Card{
             this.elementoHTML.classList.add('feito');
         }
     }
+
+    toJSON(){
+        let objeto = {
+            texto: this.texto,
+            feito: this.feito
+        };
+
+        return objeto;
+        // return `{"texto": "${this.texto}", "feito": ${this.feito} }`;
+    }
 }
 class Lista{
-    constructor(){
+    constructor(app){
+        this.app = app;
+
         this.cards = [];
         this.elementoHTML = document.createElement('ul');
         
@@ -51,7 +75,6 @@ class Lista{
         }
         
         document.querySelector('section').appendChild(this.elementoHTML);
-        this.carregar();
     }
 
     adicionarCard(textoDeEntrada){
@@ -59,34 +82,24 @@ class Lista{
         this.cards.push(card);
         
         this.elementoHTML.insertBefore(card.elementoHTML, this.input);
-        this.salvar();
+        this.app.salvar();
     }
 
     removerCard(card){
         this.elementoHTML.removeChild(card.elementoHTML);
-        
-        this.salvar();//gerou um erro
+        let indice = this.cards.indexOf(card);
+        this.cards.splice(indice, 1);
+        this.app.salvar();
     }
 
-    salvar(){
-        let lista = [];
+    toString(){
+        let cardsJSON = [];
 
         for(let card of this.cards){
-            lista.push(card.texto);
+            cardsJSON.push(card.toJSON());
         }
 
-        let listaString = JSON.stringify(lista);
-        localStorage.setItem('lista', listaString);
-    }
-
-    carregar(){
-        let listaString = localStorage.getItem('lista');
-        let lista = JSON.parse(listaString);
-
-        for(let texto of lista){
-            this.adicionarCard(texto);
-        }
-        
+        return JSON.stringify(cardsJSON);
     }
 }
 let app = new App();

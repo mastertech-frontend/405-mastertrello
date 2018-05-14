@@ -20,4 +20,14 @@ class Card{
             this.elementoHTML.classList.add('feito');
         }
     }
+
+    toJSON(){
+        let objeto = {
+            texto: this.texto,
+            feito: this.feito
+        };
+
+        return objeto;
+        // return `{"texto": "${this.texto}", "feito": ${this.feito} }`;
+    }
 }

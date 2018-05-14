@@ -1,11 +1,23 @@
 class App{
     constructor(){
-        this.listas = [];
-        let lista = new Lista();
-        let lista2 = new Lista();
+        this.carregar();
+    }
 
-        this.listas.push(lista);
-        
+    salvar(){
+        let string = this.lista.toString();
+
+        localStorage.setItem('lista', string);
+    }
+
+    carregar(){
+        let string = localStorage.getItem('lista');
+        let json = JSON.parse(string);
+
+        this.lista = new Lista(this);
+
+        for(let card of json){
+            this.lista.adicionarCard(card.texto);
+        }
     }
 
 }
